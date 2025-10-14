@@ -1,0 +1,31 @@
+services:
+  eventhub-emulator:
+    image: mcr.microsoft.com/azure-messaging/eventhubs-emulator:latest
+    container_name: eventhub-emulator
+    ports:
+      - "5672:5672"   # AMQP port
+    environment:
+      - ACCEPT_EULA=Y
+      - BLOB_SERVER=azurite
+      - METADATA_SERVER=azurite
+    depends_on:
+      - azurite
+    volumes:
+      - ./Config.json:/Eventhubs_Emulator/ConfigFiles/Config.json
+
+  azurite:
+    image: mcr.microsoft.com/azure-storage/azurite:latest
+    container_name: azurite
+    ports:
+      - "10000:10000"  # HTTP Blob service (for Event Hub emulator)
+      - "10001:10001"  # HTTP Queue service
+      - "10002:10002"  # HTTP Table service
+    command: >
+      azurite 
+      --blobHost 0.0.0.0 
+      --queueHost 0.0.0.0 
+      --tableHost 0.0.0.0 
+      --location /data 
+      --debug /data/debug.log 
+      --skipApiVersionCheck 
+      --loose 
