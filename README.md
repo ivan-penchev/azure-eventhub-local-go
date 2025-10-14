@@ -10,11 +10,12 @@ This project demonstrates how to use Microsoft Azure Event Hub emulator with Doc
 ## Quick Start
 
 1. **Setup the environment:**
+   
    ```bash
-  docker compose up -d
+     docker compose up -d
    ```
 
-2. **Run the demo:**
+3. **Run the demo:**
    ```bash
    ## In terminal one run:
    go run main.go
@@ -23,7 +24,7 @@ This project demonstrates how to use Microsoft Azure Event Hub emulator with Doc
    go run send-events.go
    ```
 
-3. **Stop the containers:**
+4. **Stop the containers:**
    ```bash
    docker compose down
    ```
